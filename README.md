@@ -26,3 +26,5 @@ def lengthOfLongestSubstring(s: str) -> int:
 Time Complexity: $O(n)$ using the Sliding Window technique.  
 Space Complexity: $O(min(m, n))$ utilizing a Hash Map tracker.
 </details>
+Longest Substring Without Repeating Characters (Python) 
+<img width="707" height="125" alt="image" src="https://github.com/user-attachments/assets/66724820-f331-45db-86ad-281820e97511" />
