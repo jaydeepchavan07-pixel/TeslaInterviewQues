@@ -1,10 +1,14 @@
 # Hi there, I'm Jaydeep! 👋
 
-<h1 align="center"># ⚡ Tesla Coding Interview Preparation Repository
+<h1 align="center">⚡ Tesla Coding Interview Preparation Repository</h1>
 
-> 🚀 A premium interview preparation repository containing Tesla coding questions with detailed explanations, dry runs, optimized solutions, and interview tips.
+<p align="center">
+🚀 A premium interview preparation repository containing Tesla coding interview questions with optimized solutions, dry runs, explanations, and interview tips.
+</p>
 
-⭐ Python • Java • C# • DSA • System Design • Interview Prep</h1>
+<p align="center">
+⭐ Python • Java • C# • DSA • System Design • Interview Prep
+</p>
 
 <p align="center">
 Curated coding interview solutions with explanations, dry runs, complexity analysis, and interview tips.
@@ -18,7 +22,7 @@ Curated coding interview solutions with explanations, dry runs, complexity analy
 
 | Metric | Value |
 |:------|:------|
-| ✅ Problems Solved | **1** |
+| ✅ Problems Solved | **2** |
 | 📝 Languages | Python • Java • C# |
 | 📚 Topics | DSA • Algorithms • System Design |
 | 🎯 Target Companies | Tesla |
@@ -85,7 +89,6 @@ TeslaInterviewQues
 ```
 
 <p align="center">
-<img src="https://komarev.com/ghpvc/?username=jaydeepchavan07-pixel&color=blue"/>
 <img src="https://img.shields.io/github/stars/jaydeepchavan07-pixel/TeslaInterviewQues?style=social"/>
 <img src="https://img.shields.io/github/last-commit/jaydeepchavan07-pixel/TeslaInterviewQues"/>
 <img src="https://img.shields.io/github/repo-size/jaydeepchavan07-pixel/TeslaInterviewQues"/>
@@ -135,8 +138,8 @@ TeslaInterviewQues
 
 | # | Problem | Solution | Difficulty | Status |
 |---|---------|----------|------------|:------:|
-| 1 | Longest Substring Without Repeating Characters | 🐍 [Python](Python/Sliding_Window/LongestSubstringWithoutRepeatingCharacters.py) | 🟨 Medium | ✅ |
-| 2 | Two Sum | 🟩 Easy | ⏳ |
+| 1 | Longest Substring Without Repeating Characters | 🐍 [Python](Python/Sliding_Window/001_LongestSubstringWithoutRepeatingCharacters.py) | 🟨 Medium | ✅ |
+| 2 | Reorder Data in Log Files | 🐍 [Python](Python/Sorting/002_ReorderDataInLogFiles.py) | 🟨 Medium | ✅ |
 | 3 | Group Anagrams | 🟨 Medium | ⏳ |
 | 4 | LRU Cache | 🟥 Hard | ⏳ |
 | 5 | Merge Intervals | 🟨 Medium | ⏳ |
@@ -146,13 +149,13 @@ TeslaInterviewQues
 | Difficulty | Count |
 |------------|------:|
 | 🟩 Easy | 0 |
-| 🟨 Medium | 1 |
+| 🟨 Medium | 2 |
 | 🟥 Hard | 0 |
 
 ## 📚 Table of Contents
 
 - [1. Longest Substring Without Repeating Characters (Python)](#1-longest-substring-without-repeating-characters-python)
-- [Upcoming Problems](#upcoming-problems)
+- [2. Reorder Data in Log Files (Python)](#2-reorder-data-in-log-files-python)
 
 
 ## 1. Longest Substring Without Repeating Characters (Python)
@@ -315,16 +318,238 @@ O(min(m, n))
 - Mention that each character is processed at most once.
 - Clearly justify the `O(n)` time complexity.
 
+#### ⚠️ Edge Cases
+
+- Empty string
+- Single character
+- All identical characters
+- All unique characters
+- Unicode characters
+
 #### 📖 Related Problems
 
 - LeetCode #76 – Minimum Window Substring
 - LeetCode #159 – Longest Substring with At Most Two Distinct Characters
 - LeetCode #340 – Longest Substring with At Most K Distinct Characters
 
+</details>
+</details>
+
+## 2. Reorder Data in Log Files (Python)
+
+<details>
+<summary><b>Click to expand solution</b></summary>
+
+## 📌 Problem Overview
+
+| Property | Value |
+|----------|-------|
+| Problem | Reorder Data in Log Files |
+| Original Problem | [LeetCode #937](https://leetcode.com/problems/reorder-data-in-log-files/) |
+| Solution | [Python Solution](Python/<Folder>/<FileName>.py) |
+| Difficulty | 🟨 Medium |
+| Topics | String, Sorting, Array |
+
+---
+
+## 📝 Problem Statement
+
+You are given an array of logs, where each log is a space-delimited string with an identifier as the first word.
+
+There are two types of logs:
+
+Letter-logs: All words (except the identifier) consist of lowercase English letters.
+
+Digit-logs: All words (except the identifier) consist of digits.
+
+Reorder these logs so that:
+
+All letter-logs come before all digit-logs.
+
+The letter-logs are sorted lexicographically by their contents. If their contents are the same, sort them lexicographically by their identifiers.
+
+The digit-logs maintain their relative ordering.
+
+Return the final ordering of the logs.
+
+### Example
+
+```text
+Input: logs = ["dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero"]
+...
+
+Output: ["let1 art can","let3 art zero","let2 own kit dig","dig1 8 1 5 1","dig2 3 6"]
+...
+
+Explanation:
+The letter-log contents are all different, so their ordering is "art can", "art zero", "own kit dig".
+The digit-logs maintain their relative positions: "dig1 8 1 5 1" stays before "dig2 3 6".
+...
+```
+
+---
+
+## 💡 Approach
+
+The core idea is to separate the logs into two streams based on their content type, apply a custom sorting mechanism to the letter-logs, and leave the digit-logs untouched to maintain stability.
+
+Split & Classify: Iterate through the list of logs. Split each log at the very first space character to isolate the identifier from the content.
+
+Character Filtering: Examine the first character of the content segment. If it is a numeric digit, append the log to a digit_logs list. Otherwise, append it to a letter_logs list.
+
+Stable Custom Sort: Sort the letter_logs using Python's built-in Timsort algorithm by assigning a custom sorting key. The key returns a structural tuple (content, identifier). Python naturally processes tuple elements positionally—sorting by content first, and breaking ties with the identifier.
+
+Concatenate: Merge the sorted letter_logs with the original-order digit_logs array.
+
+Example:
+
+- Use a Hash Map to store...
+- Maintain two pointers...
+- Update answer whenever...
+
+---
+
+## 🤔 Why This Approach?
+
+Why brute force is slow: A generic sorting function trying to dynamically compare pairs of digit-logs vs letter-logs across all sorting boundaries introduces high runtime overhead and can easily break stable placement constraints if not implemented perfectly.
+
+Why this algorithm is optimal: It cleanly maps the problem to standard Python infrastructure. Sorting only the letter-logs saves execution steps, while linear partitioning ensures that digit-logs are processed in an ideal $O(N)$ sweep without violating their absolute positions.
+
+Why interviewer likes this approach: It tests clean manipulation of strings (split(..., maxsplit=1)) and evaluates a strong conceptual understanding of custom sorting metrics via key functions and compound tuple structures.
+
+---
+
+## 💻 Optimal <Language> Solution
+
+```python
+
+def reorderLogFiles(logs: list[str]) -> list[str]:
+    letter_logs = []
+    digit_logs = []
+    
+    # 1. Separate logs into respective containers
+    for log in logs:
+        # maxsplit=1 splits only at the first space instance
+        identifier, content = log.split(" ", 1)
+        
+        if content[0].isdigit():
+            digit_logs.append(log)
+        else:
+            letter_logs.append(log)
+            
+    # 2. Sort letter_logs dynamically using a tuple key
+    # (Primary Sort: Content, Secondary Sort: Identifier)
+    letter_logs.sort(key=lambda log: (log.split(" ", 1)[1], log.split(" ", 1)[0]))
+    
+    # 3. Concatenate and return complete list
+    return letter_logs + digit_logs
+
+test_logs = ["dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero"]
+result = reorderLogFiles(test_logs)
+print("The input is:", test_logs)
+print("The output is:", result)
+
+```
+
+---
+
+## 📸 Output Screenshot
+
+<img src="![alt text](002_ReorderDataInLogFiles.png)" width="700"/>
+
+---
+
+## ⏱️ Complexity Analysis
+
+| Complexity | Value |
+|-----------|-------|
+| Time | `$O(M \cdot N \log N)$` |
+| Space | `$O(M \cdot N)$` |
+
+---
+
+## 🔍 Dry Run
+<details>
+<summary><b>Click to expand the step-by-step dry run & complexity breakdown</b></summary>
+### Example Input
+
+```text
+logs = ["dig1 8 1", "let1 art", "let2 art"]
+```
+
+### Initial State
+
+```python
+letter_logs = []
+digit_logs = []
+```
+
+### Step-by-Step Execution
+
+| Step | Action | State | Result |
+|------|--------|-------|--------|
+|1|...|...|...|
+|2|...|...|...|
+
+---
+
+## 🧠 Complexity Breakdown
+
+### Time Complexity
+
+The time complexity is $O(M \cdot N \log N)$, where $N$ represents the total number of logs, and $M$ marks the maximum length of a single log string. Partitioning the elements takes $O(M \cdot N)$ steps. Sorting the list of letter-logs performs $O(N \log N)$ structural string operations. Because string comparison operations depend directly on string length, comparing two strings scales up by a factor of $M$.
+
+### Space Complexity
+
+The space complexity settles at $O(M \cdot N)$. The algorithm requires auxiliary dynamic arrays (letter_logs and digit_logs) to host split-out elements, replicating the structure of the input space up to the total character content count.
+
+---
+
+## 🎯 Interview Tips
+
+Mention brute force first: Confirm that handling both classification and stable sorting logic simultaneously within a single complex comparator can easily compromise relative layout requirements.
+
+Explain optimization: Explicitly specify how Python's built-in Timsort behaves stably, making a simple divide-and-conquer tracking array approach bulletproof.
+
+Mention edge cases: Validate conditions involving exact duplicate content text layers that trigger your identifier logic explicitly.
+
+Discuss complexity before coding: Clearly outline how log text length boundaries influence operations during key string splitting functions.
+
+---
+
+## ⚠️ Edge Cases
+
+Identical Content: Letter-logs with identical text contents correctly verify identifier fallback sorting keys.
+
+Pure Digit/Letter Logs: Arrays holding entirely digit logs or exclusively letter logs loop correctly without empty exceptions.
+
+Varying Word Counts: The string split implementation properly captures everything after the identifier, regardless of whitespace counts or string contents.
+
+Single Log Present: Array elements under base parameters function smoothly.
+
+---
+
+## 📖 Related Problems
+
+Merge Sorted Array
+
+Custom Sort String
+
+Sort Colors
+
+---
+
+## 🔗 Files
+
+- 🐍 Python: `Python/<Folder>/<FileName>.py`
+
+</details>
 
 
 </details>
-</details>
+
+---
+
 
 ## 🚀 Upcoming Problems
 
