@@ -1,12 +1,3 @@
-# TeslaInterviewQues
-# Hi there, I'm Jaydeep! 👋
-
-Welcome to my GitHub profile. Here are some of my optimized algorithmic solutions:
-
-### 🚀 Featured Code Implementations
-
-<details>
-<summary><b>1. Longest Substring Without Repeating Characters (Python)</b></summary>
 
 def lengthOfLongestSubstring(s: str) -> int:
     char_map = {}
@@ -23,6 +14,5 @@ def lengthOfLongestSubstring(s: str) -> int:
         
     return max_length
 
-Time Complexity: $O(n)$ using the Sliding Window technique.  
-Space Complexity: $O(min(m, n))$ utilizing a Hash Map tracker.
-</details>
+result = lengthOfLongestSubstring("abcabcbb")
+print("The output is:", result)
